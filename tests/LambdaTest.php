@@ -24,25 +24,27 @@ class LambdaTest{
    public function testAdd() {		
 		
 		$url = "https://". $GLOBALS['LT_USERNAME'] .":" . $GLOBALS['LT_ACCESS_KEY'] ."@hub.lambdatest.com/wd/hub";		
-		$desired_capabilities = new DesiredCapabilities();
-		$desired_capabilities->setCapability('browserName',$GLOBALS['LT_BROWSER']);
-		$desired_capabilities->setCapability('version', $GLOBALS['LT_BROWSER_VERSION']);
-		$desired_capabilities->setCapability('platform', $GLOBALS['LT_OPERATING_SYSTEM']);
-		$desired_capabilities->setCapability('name', "PHPTestSample");
-		$desired_capabilities->setCapability('build', "LambdaTestSampleApp");
-		$desired_capabilities->setCapability('network', true);
-		$desired_capabilities->setCapability('visual', true);
-		$desired_capabilities->setCapability('video ', true);
-		$desired_capabilities->setCapability('console', true);
-		
-		self::$driver = RemoteWebDriver::create($url, $desired_capabilities); 		
+		$capability = array(
+			"browserName" => $GLOBALS['LT_BROWSER'],
+			"version" => $GLOBALS['LT_BROWSER_VERSION'],
+			"platform" => $GLOBALS['LT_OPERATING_SYSTEM'],
+			"name" => "PHPTestSample",
+			"build" => "LambdaTestSampleApp",
+			"network" => true,
+			"visual" => true,
+			"video" => true,
+			"console" => true,
+			"terminal" => true,
+			"plugin" => "php-php_unit"
+		);
+
+		self::$driver = RemoteWebDriver::create($url, $capability); 		
 				
 		$itemName = 'Yey, Lets add it to list';
         self::$driver->get("https://lambdatest.github.io/sample-todo-app/");
         $element1 = self::$driver->findElement(WebDriverBy::name("li1"));
 		$element1->click();
 			
-            
 		$element2 = self::$driver->findElement(WebDriverBy::name("li2"));
         $element2->click();
 			
