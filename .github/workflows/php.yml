@@ -30,12 +30,12 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
     - name: Run against Edge
-      run: LT_BROWSER="edge" && php .\tests\LambdaTest.php
+      run: LT_BROWSER="edge" && php ./tests/LambdaTest.php
       
     - name: Run against Chrome
-      run: LT_BROWSER="chrome" && php .\tests\LambdaTest.php
+      run: LT_BROWSER="chrome" && php ./tests/LambdaTest.php
       
     - name: Run against Firefox
-      run: LT_BROWSER="firefox" && php .\tests\LambdaTest.php
+      run: LT_BROWSER="firefox" && php ./tests/LambdaTest.php
       
       
