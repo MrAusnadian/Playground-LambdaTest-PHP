@@ -12,6 +12,7 @@ permissions:
 env:
   LT_USERNAME: ${{ secrets.LT_USERNAME }}
   LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+  LT_BROWSER: "chrome"
 
 jobs:
   build:
@@ -33,13 +34,18 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run against Edge
-      run: LT_BROWSER="edge" && php ./tests/LambdaTest.php
       
     - name: Run against Chrome
-      run: LT_BROWSER="chrome" && php ./tests/LambdaTest.php
-      
+      run: php ./tests/LambdaTest.php
+
     - name: Run against Firefox
-      run: LT_BROWSER="firefox" && php ./tests/LambdaTest.php
+      env:
+        LT_BROWSER: "firefox"
+      run: php ./tests/LambdaTest.php
       
+    - name: Run against Edge
+      env:
+        LT_BROWSER: "edge"
+      run: php ./tests/LambdaTest.php
+
       
